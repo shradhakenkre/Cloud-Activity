@@ -13,4 +13,17 @@ router.post("/", async (req, res) => {
   res.status(201).json(task);
 });
 
+router.post('/', async (req, res) => {
+  console.log('Received new task:', req.body); // 🔍 Add this log
+  try {
+      const newTask = new Task({ title: req.body.title });
+      const savedTask = await newTask.save();
+      res.status(201).json(savedTask);
+  } catch (err) {
+      console.error('Error saving task:', err); // 🔥 Add this log
+      res.status(500).json({ message: err.message });
+  }
+});
+
+
 module.exports = router;
