@@ -4,12 +4,9 @@
 
 A simple Node.js application that provides an API for task management and serves static HTML files for the user interface.
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
-![Cors](https://img.shields.io/badge/Cors-0000FF?style=for-the-badge)
-![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge)
+## 🌐 Live Demo
+
+Check out the application: [Cloud-Activity Live](https://cloud-activity-1.onrender.com/)
 
 ## ✨ Features
 
@@ -24,7 +21,7 @@ A simple Node.js application that provides an API for task management and serves
 - **Cors**: Middleware to enable Cross-Origin Resource Sharing.
 - **Dotenv**: Loads environment variables from a `.env` file.
 
-## Clone the repository:
+## Clone the repository
 
    ```bash
    git clone https://github.com/Savita-Sidnal/Cloud-Activity.git
