@@ -14,7 +14,6 @@ A simple Node.js application that provides an API for task management and serves
 ## ✨ Features
 
 - **Task Management**: Easily add tasks to the system.
-- **Static File Serving**: Serves static HTML files for the user interface.
 
 ## 🛠️ Tech Stack
 
