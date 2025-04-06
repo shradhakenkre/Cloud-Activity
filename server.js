@@ -18,8 +18,8 @@ app.use("/api/tasks", taskRoutes);
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 // After defining routes, handle requests that don't match any route
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+app.get('/api/*path', (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
 
 // MongoDB connection
