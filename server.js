@@ -17,15 +17,16 @@ app.use("/api/tasks", taskRoutes);
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
-// After defining routes, handle requests that don't match any route
-app.get('/api/*path', (req, res) => {
+// After defining API routes, handle requests that don't match any API route
+// This should be placed after all other routes
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.error("MongoDB connection error:", err));
 
 // Start the server
 const PORT = process.env.PORT || 10000;
