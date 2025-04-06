@@ -32,7 +32,3 @@ The application is deployed on [Render](https://render.com/), a cloud platform f
 ## 🗄️ Data Storage with MongoDB Atlas
 
 The application utilizes [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for data storage. MongoDB Atlas is a fully managed cloud database service that offers scalability and flexibility. Ensure that your MongoDB Atlas cluster is properly configured to accept connections from your Render service by following the deployment steps mentioned above.
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
