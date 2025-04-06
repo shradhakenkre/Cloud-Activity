@@ -3,6 +3,7 @@
 ## 📝 Task Management API
 
 A simple Node.js application that provides an API for task management and serves static HTML files for the user interface.
+![Deployment Status](https://deploy-badge.vercel.app/api?url=https://your-deployment-url.com)
 
 ## 🌐 Live Demo
 
