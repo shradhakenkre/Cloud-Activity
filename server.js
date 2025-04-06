@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -9,9 +10,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// API Routes
 const taskRoutes = require("./routes/tasks");
 app.use("/api/tasks", taskRoutes);
+
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, "frontend/build")));
+
+// After defining routes, handle requests that don't match any route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
+});
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
