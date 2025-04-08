@@ -1,27 +1,28 @@
-require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const taskRoutes = require('./routes/tasks');
+const port = process.env.PORT || 3000;
 
 // Middleware
+app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
-// MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+// ✅ Serve static files
+app.use(express.static('public'));
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error(err));
+  .catch((err) => console.log('DB Error:', err));
 
 // Routes
-app.use('/api/tasks', taskRoutes);
+const taskRoutes = require('./routes/tasks'); // Note: 'tasks' not 'task'
+app.use('/tasks', taskRoutes);
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// Server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });

@@ -1,43 +1,47 @@
-const form = document.getElementById("task-form");
-const input = document.getElementById("task-input");
-const list = document.getElementById("task-list");
+const taskList = document.getElementById('task-list');
+const taskForm = document.getElementById('task-form');
 
-const API = "/api/tasks";
+const API_BASE = 'http://localhost:3000/tasks';
 
-const fetchTasks = async () => {
-  const res = await fetch(API);
+// Fetch and display tasks
+async function loadTasks() {
+  const res = await fetch(API_BASE);
   const tasks = await res.json();
-  list.innerHTML = "";
+
+  taskList.innerHTML = '';
   tasks.forEach(task => {
-    const li = document.createElement("li");
-    li.textContent = task.title;
-    list.appendChild(li);
+    const li = document.createElement('li');
+    li.textContent = `${task.title} - ${task.description}`;
+    
+    const delBtn = document.createElement('button');
+    delBtn.textContent = 'Delete';
+    delBtn.onclick = async () => {
+      await fetch(`${API_BASE}/${task._id}`, { method: 'DELETE' });
+      loadTasks();
+    };
+    
+    li.appendChild(delBtn);
+    taskList.appendChild(li);
   });
-};
+}
 
-form.addEventListener("submit", async (e) => {
+// Add task
+taskForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const title = input.value;
-  if (!title) return;
 
-  try {
-    const res = await fetch(API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title }),
-    });
+  const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
 
-    if (res.ok) {
-      alert("✅ Task added!");
-      input.value = "";
-      fetchTasks();
-    } else {
-      alert("❌ Failed to add task!");
-    }
-  } catch (err) {
-    console.error("Error:", err);
-    alert("❌ Error adding task!");
-  }
+  await fetch(API_BASE, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, description })
+  });
+
+  taskForm.reset();
+  loadTasks();
 });
 
-window.onload = fetchTasks;
+loadTasks();
