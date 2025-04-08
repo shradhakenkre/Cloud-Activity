@@ -1,16 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const Task = require("../models/Task.js");
+const mongoose = require('mongoose');
 
-// Create a new task
-router.post("/", async (req, res) => {
-  try {
-    const newTask = new Task(req.body);
-    const savedTask = await newTask.save();
-    res.status(201).json({ message: "Task added successfully!", task: savedTask });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to add task" });
-  }
+const taskSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  completed: { type: Boolean, default: false }
 });
 
-module.exports = router;
+module.exports = mongoose.model('Task', taskSchema);
